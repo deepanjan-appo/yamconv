@@ -1,3 +1,6 @@
+"""
+This file is responsible for creating the list of tiers from the data variable.
+"""
 # pylint: disable=C
 import templates
 from copy import deepcopy

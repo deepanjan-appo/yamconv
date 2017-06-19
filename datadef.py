@@ -1,3 +1,9 @@
+"""
+This file is responsible for creating the data variable, i.e. the parsed form
+of the yaml and json content. This return a data variable which may be deepcopied 
+or accessed as necessary.
+"""
+
 # pylint: disable=C
 import os, glob
 

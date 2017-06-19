@@ -1,3 +1,8 @@
+"""
+This is the entrypoint for the code.
+You run the entire program using entrypoint.py
+"""
+
 # pylint: disable=C
 from copy import deepcopy
 import confio

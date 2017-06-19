@@ -1,4 +1,9 @@
+"""
+This file contains the file, tier, and service templates which may be modified as necessary.
+"""
+
 # pylint: disable=C
+
 import yaml
 
 file_template = yaml.load("""version: "1.0"
