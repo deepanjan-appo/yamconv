@@ -28,7 +28,7 @@ def tierListBuilder(data):
         # print temptier['containers'][0]
         for j in range(len(temptier['containers'])):
             if 'lifecycle' in temptier['containers'][j]:
-                temptier['containers'][j]['triggers'] = temptier['containers'][j]['lifecycle']
+                temptier['containers'][j]['triggers'] = deepcopy(temptier['containers'][j]['lifecycle'])
                 del temptier['containers'][j]['lifecycle']
             if 'env' in temptier['containers'][j]:
                 # print temptier['containers'][0]['env']
