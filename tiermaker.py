@@ -29,7 +29,7 @@ def tierListBuilder(data):
         for j in range(len(temptier['containers'])):
             if 'lifecycle' in temptier['containers'][j]:
                 temptier['containers'][j]['triggers'] = temptier['containers'][j]['lifecycle']
-                del temptier['containers'][j]
+                del temptier['containers'][j]['lifecycle']
             if 'env' in temptier['containers'][j]:
                 # print temptier['containers'][0]['env']
                 for i in temptier['containers'][j]['env'][:]:
