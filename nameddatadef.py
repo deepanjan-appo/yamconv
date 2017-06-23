@@ -1,4 +1,8 @@
 # pylint: disable=C
+"""
+This file contains the function namedDataCreator
+for dividing the massive data set variable according to namespaces
+"""
 from copy import deepcopy
 def namedDataCreator(data):
     namespace_array = []

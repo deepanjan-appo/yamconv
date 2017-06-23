@@ -1,4 +1,9 @@
 # pylint: disable=C
+"""
+This python file contains the outFileMaker function which is responsible for
+creating the output data structure
+and writing it to a file
+"""
 from copy import deepcopy
 import templates
 import tiermaker

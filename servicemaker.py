@@ -1,7 +1,7 @@
+# pylint: disable=C
 """
 This file is responsible for creating the list of services from the data variable.
 """
-# pylint: disable=C
 import templates
 from copy import deepcopy
 
