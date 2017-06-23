@@ -21,7 +21,7 @@ def outFileMaker(named_data):
 
 
         #filepath_write = raw_input("\n Enter a file with its path to write to e.g. C:\Users\Admin\Desktop\output.yaml : ")
-        filepath_write = "D:\\" + key + ".yaml"
+        filepath_write = "D:\\output_files\\" + key + ".yaml"
         print "\nOutput file generated at " + filepath_write
         confio.yaml_dumper(filepath_write, outfile)
     return 0
