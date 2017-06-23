@@ -25,7 +25,8 @@ def namedDataCreator(data):
                     named_data[j].append(deepcopy(data[i]))
         print named_data
     else:
-        named_data['default'] = []
+        appname = raw_input("Enter a name for your app:")
+        named_data[appname] = []
         for i in range(len(data)):
-            named_data['default'].append(deepcopy(data[i]))
+            named_data[appname].append(deepcopy(data[i]))
     return named_data
