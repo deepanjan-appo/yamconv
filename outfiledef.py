@@ -5,6 +5,8 @@ creating the output data structure
 and writing it to a file
 """
 from copy import deepcopy
+from sys import platform
+import os
 import templates
 import tiermaker
 import servicemaker
@@ -19,9 +21,18 @@ def outFileMaker(named_data):
         if servicemaker.getServiceNumber(named_data[key]) > 0:
             outfile['services'] = deepcopy(servicemaker.serviceListBuilder(named_data[key]))
 
+        if platform == "win32":
+            #filepath_write = raw_input("\n Enter a file with its path to write to e.g. C:\Users\Admin\Desktop\output.yaml : ")
+            #filepath_write = "D:\\output_files\\" + key + ".yaml"
+            filepath_write = os.path.expanduser("~\\Documents\\"+key+".yaml")
+        #elif platform == "linux" or platform == "linux2" or platform == "darwin":
+        else:
+            directory = os.path.expanduser("~/appOrbitTemplate")
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            filepath_write = os.path.expanduser("~/appOrbitTemplate/"+key+".yaml")
+        
 
-        #filepath_write = raw_input("\n Enter a file with its path to write to e.g. C:\Users\Admin\Desktop\output.yaml : ")
-        filepath_write = "D:\\output_files\\" + key + ".yaml"
         print "\nOutput file generated at " + filepath_write
         confio.yaml_dumper(filepath_write, outfile)
     return 0
