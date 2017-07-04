@@ -64,6 +64,24 @@ def tierListBuilder(data):
         # print temptier['containers'][j]
         # print volumelist
 
+        
         tierlist.append(temptier)
+    print "Tiers detected are: "
+    i = 1
+    for tr in tierlist:
+        print i , " : " , tr['name']
+        i += 1
+    orderchoice = raw_input("Do you wish to change ordering? Y/N")
+    if orderchoice == "Y" or orderchoice == "y":
+        #print "Enter the order as comma separated values without space e.g. 1,2,3 :"
+        userlistorder = raw_input("Enter the order as comma separated values without space e.g. 3,1,2 :")
+        myorder = [int(x) for x in userlistorder.split(",")]
+        orderedlist = []
+
+        #for j in range(len(userlistorder)):
+        #    orderedlist.append(tierlist[ord(userlistorder[j])-1])
+        orderedlist = [ tierlist[i-1] for i in myorder]
+        
+        return orderedlist
 
     return tierlist
