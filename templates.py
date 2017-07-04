@@ -10,7 +10,6 @@ app_id: AppDemo
 tiers:""")
 tier_template = yaml.load("""
       name: ds2db
-      type: db
       expose: True
       replicas: 1
       containers:

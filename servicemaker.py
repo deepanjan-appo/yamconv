@@ -12,6 +12,7 @@ def getServiceNumber(data):
             serv_count += 1
     return serv_count
 
+
 def serviceListBuilder(data):
     servicelist = []
     bring = []

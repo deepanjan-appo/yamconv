@@ -5,6 +5,13 @@ This file is responsible for creating the list of tiers from the data variable.
 import templates
 from copy import deepcopy
 
+def getLoadBalancersAndNodePorts(data):
+    ldnp = 0
+    for i in data:
+        if i['kind'] == 'Service' and 'spec' in i and 'type' in i['spec'] and (i['spec']['type']=="LoadBalancer" or i['spec']['type']=="NodePort"):
+            ldnp += 1
+    return ldnp
+
 def tierListBuilder(data):
     tierlist = []
     j = 0
@@ -18,8 +25,8 @@ def tierListBuilder(data):
         temptier = deepcopy(templates.tier_template)
         if 'name' in p['metadata']:
             temptier['name'] = p['metadata']['name']
-        if 'kind' in p:
-            temptier['type'] = p['kind']
+        #if 'kind' in p:
+        #    temptier['type'] = p['kind']
         if 'replicas' in p['spec']:
             temptier['replicas'] = p['spec']['replicas']
         temptier['containers'] = deepcopy(p['spec']['template']['spec']['containers'])
@@ -66,15 +73,20 @@ def tierListBuilder(data):
 
         
         tierlist.append(temptier)
+    finaltier = []
     print "Tiers detected are: "
     i = 1
     for tr in tierlist:
         print i , " : " , tr['name']
         i += 1
-    orderchoice = raw_input("Do you wish to change ordering? Y/N")
+
+
+    #Patch to add ordering:
+
+    orderchoice = raw_input("Do you wish to change ordering? Y/N:  ")
     if orderchoice == "Y" or orderchoice == "y":
         #print "Enter the order as comma separated values without space e.g. 1,2,3 :"
-        userlistorder = raw_input("Enter the order as comma separated values without space e.g. 3,1,2 :")
+        userlistorder = raw_input("Enter the order as comma separated values without space e.g. 3,1,2 : ")
         myorder = [int(x) for x in userlistorder.split(",")]
         orderedlist = []
 
@@ -82,6 +94,15 @@ def tierListBuilder(data):
         #    orderedlist.append(tierlist[ord(userlistorder[j])-1])
         orderedlist = [ tierlist[i-1] for i in myorder]
         
-        return orderedlist
+        finaltier = deepcopy(orderedlist)
 
-    return tierlist
+    else:
+        finaltier = deepcopy(tierlist)
+
+
+    #Patch to add external service specification
+
+    extservcount = getLoadBalancersAndNodePorts(data);
+    for x in range(extservcount):
+        finaltier[x]['containers'][0]['ports'][0]['service'] = "external"
+    return finaltier
